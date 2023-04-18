@@ -66,6 +66,10 @@ pub struct Arguments {
     )]
     pub quiet: bool,
 
+    /// Report execution time of each test.
+    #[arg(long = "report-time", help = "Report execution time")]
+    pub report_time: bool,
+
     // ============== OPTIONS =================================================
     /// Number of threads used for parallel testing.
     #[arg(

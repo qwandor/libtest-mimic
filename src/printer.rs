@@ -20,6 +20,7 @@ pub(crate) struct Printer {
     format: FormatSetting,
     name_width: usize,
     kind_width: usize,
+    report_time: bool,
 }
 
 impl Printer {
@@ -80,6 +81,7 @@ impl Printer {
             format,
             name_width,
             kind_width,
+            report_time: args.report_time,
         }
     }
 
@@ -262,6 +264,8 @@ impl Printer {
                 fmt_with_thousand_sep(*avg),
                 fmt_with_thousand_sep(*variance),
             ).unwrap();
+        } else if self.report_time && matches!(outcome, Outcome::Passed | Outcome::Failed { .. }) {
+            write!(self.out, " <{:.3}s>", 0.0).unwrap();
         }
     }
 }
